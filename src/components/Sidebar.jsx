@@ -78,13 +78,13 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           </Tabs>
         </ListItem>
         <ListItem button component={Link} to="/">
-          <ListItemIcon>
+          <ListItemIcon style={{ color: "white" }}>
             <Build />
           </ListItemIcon>
           <ListItemText primary="Projects" style={{ color: "white" }} />
         </ListItem>
         <ListItem button component={Link} to="/user-management">
-          <ListItemIcon>
+          <ListItemIcon style={{ color: "white" }}>
             <Person />
           </ListItemIcon>
           <ListItemText primary="User Management" style={{ color: "white" }} />
