@@ -30,58 +30,10 @@ import {
 } from "@mui/icons-material";
 import { useMediaQuery } from "@mui/material";
 import { Link } from "react-router-dom";
+import Projects from "../constants/ProjectData";
 
 const AllProjects = () => {
-  const [projects, setProjects] = useState([
-    {
-      id: 1,
-      name: "Content Edit",
-      date: "01/01/2025",
-      logo: "CE",
-      category: "GroupedProject",
-      color: "orange"
-    },
-    {
-      id: 2,
-      name: "Attendance",
-      date: "02/01/2025",
-      logo: "A",
-      category: "GroupedProject",
-      color: "red"
-    },
-    {
-      id: 3,
-      name: "E-Commerce",
-      date: "03/01/2025",
-      logo: "E",
-      category: "UngroupedProject",
-      color: "blue"
-    },
-    {
-      id: 4,
-      name: "Stride",
-      date: "04/01/2025",
-      logo: "S",
-      category: "GroupedProject",
-      color: "red"
-    },
-    {
-      id: 5,
-      name: "HRM",
-      date: "05/01/2025",
-      logo: "H",
-      category: "GroupedProject",
-      color: "blue"
-    },
-    {
-      id: 6,
-      name: "Delivery App",
-      date: "06/01/2025",
-      logo: "DA",
-      category: "UngroupedProject",
-      color: "Green"
-    }
-  ]);
+  const [projects, setProjects] = useState(Projects);
 
   const [view, setView] = useState("grid");
   const [activeTab, setActiveTab] = useState(0);
@@ -113,7 +65,7 @@ const AllProjects = () => {
       return true;
     })
     .filter((project) =>
-      project.name.toLowerCase().includes(searchQuery.toLowerCase())
+      project?.name?.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
   const handleMenuOpen = (event, project) => {
@@ -133,7 +85,7 @@ const AllProjects = () => {
   };
 
   const handleDelete = () => {
-    setProjects(projects.filter((p) => p.id !== selectedProject.id));
+    setProjects(projects?.filter((p) => p.id !== selectedProject.id));
     handleMenuClose();
   };
 
@@ -142,11 +94,11 @@ const AllProjects = () => {
   const handleEditDialogClose = () => setEditDialogOpen(false);
 
   const handleEditDialogSave = () => {
-    if (editedProject.id) {
+    if (editedProject?.id) {
       setProjects((prev) =>
         prev.map((p) =>
-          p.id === editedProject.id
-            ? { ...p, name: editedProject.name, date: editedProject.date }
+          p.id === editedProject?.id
+            ? { ...p, name: editedProject?.name, date: editedProject?.date }
             : p
         )
       );
@@ -255,7 +207,7 @@ const AllProjects = () => {
       {!isMobile ? (
         <div
           style={{
-            display: "grid",
+            display: view === "grid" ? "grid" : "block",
             gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)",
             gap: "16px",
             padding: "16px"
@@ -270,7 +222,13 @@ const AllProjects = () => {
                 textAlign: "center",
                 borderRadius: "16px",
                 boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-                minHeight: "200px"
+                minHeight: "200px",
+                cursor: "pointer",
+                display: view === "list" ? "flex" : "block",
+                flexDirection: view === "list" ? "row" : "column",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginBottom: "16px"
               }}
             >
               <Link to={`/project/${project.id}`}>
@@ -296,16 +254,18 @@ const AllProjects = () => {
                 >
                   {project.date}
                 </Typography>
-                <Avatar
-                  sx={{
-                    bgcolor: project.color || "#1976d2",
-                    width: 64,
-                    height: 64,
-                    margin: "40px auto 16px"
-                  }}
-                >
-                  {project.logo}
-                </Avatar>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <Avatar
+                    sx={{
+                      bgcolor: project.color || "#1976d2",
+                      width: 64,
+                      height: 64,
+                      margin: "40px 0 16px"
+                    }}
+                  >
+                    {project.logo}
+                  </Avatar>
+                </div>
               </Link>
               <Button
                 size="small"
@@ -333,7 +293,7 @@ const AllProjects = () => {
               >
                 <MoreVertIcon />
               </IconButton>
-              {dropdownOpen === project.id && (
+              {dropdownOpen === project?.id && (
                 <div
                   style={{
                     position: "absolute",
@@ -377,7 +337,7 @@ const AllProjects = () => {
             padding: "16px"
           }}
         >
-          {filteredProjects.map((project) => (
+          {filteredProjects?.map((project) => (
             <Card
               key={project.id}
               sx={{
@@ -400,7 +360,7 @@ const AllProjects = () => {
                     fontSize: "12px"
                   }}
                 >
-                  {project.name}
+                  {project?.name}
                 </Typography>
                 <Typography
                   variant="subtitle2"
@@ -412,7 +372,7 @@ const AllProjects = () => {
                     fontSize: "12px"
                   }}
                 >
-                  {project.date}
+                  {project?.date}
                 </Typography>
 
                 <Avatar
@@ -454,7 +414,7 @@ const AllProjects = () => {
                 <MoreVertIcon />
               </IconButton>
 
-              {dropdownOpen === project.id && (
+              {dropdownOpen === project?.id && (
                 <div
                   style={{
                     position: "absolute",
