@@ -210,11 +210,23 @@ const AllProjects = () => {
                 Create New +
               </Button>
             )}
+            <IconButton>
+              <MoreVertIcon />
+            </IconButton>
           </Box>
         </Box>
       ) : (
         <Box>
-        <h1 style={{backgroundColor:"#007bff",color:"white",borderRadius:"15px",padding:"4px"}}>Projects</h1>
+          <h1
+            style={{
+              backgroundColor: "#007bff",
+              color: "white",
+              borderRadius: "15px",
+              padding: "4px"
+            }}
+          >
+            Projects
+          </h1>
           <TextField
             size="large"
             placeholder="Search projects"
