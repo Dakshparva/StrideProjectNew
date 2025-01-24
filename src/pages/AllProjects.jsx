@@ -202,7 +202,7 @@ const AllProjects = () => {
               <Button
                 onClick={handleAddNewProject}
                 style={{
-                  backgroundColor: "blue",
+                  backgroundColor: "#0056b3",
                   color: "white",
                   borderRadius: "10px"
                 }}
